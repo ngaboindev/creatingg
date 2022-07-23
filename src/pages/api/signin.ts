@@ -1,12 +1,13 @@
 import bcrypt from 'bcrypt';
-import { NextApiRequest, NextApiResponse } from 'next';
-import nextConnect from 'next-connect';
-import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
+import jwt from 'jsonwebtoken';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import nextConnect from 'next-connect';
+
 import prisma from '@/lib/prisma';
 
 const apiRoute = nextConnect({
-  onNoMatch(req:NextApiRequest, res:NextApiResponse) {
+  onNoMatch(req: NextApiRequest, res: NextApiResponse) {
     res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
   },
 });
@@ -16,10 +17,9 @@ apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
   const user = await prisma.user.findUnique({
     where: {
-      email
-    }
-  })
-
+      email,
+    },
+  });
 
   if (user && bcrypt.compareSync(password, user.password)) {
     const token = jwt.sign(
@@ -28,7 +28,7 @@ apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
         id: user.id,
         time: Date.now(),
       },
-        process.env.JWT_SECRET,
+      process.env.JWT_SECRET as string,
       {
         expiresIn: '8h',
       }
@@ -50,6 +50,5 @@ apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
     res.json({ error: 'Email or Password is wrong' });
   }
 });
-
 
 export default apiRoute;
