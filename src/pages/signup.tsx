@@ -1,17 +1,15 @@
+import * as React from 'react';
 
-import * as React from 'react'
-
-import { Meta } from '@/layouts/Meta'
-import AuthForm from '@/components/AuthForm'
+import AuthForm from '@/components/AuthForm';
+import { Meta } from '@/layouts/Meta';
 
 function Signup(): JSX.Element {
   return (
     <>
-      <Meta title='Sign Up | Creatingg' />
+      <Meta title="Sign Up | Creatingg" />
       <AuthForm mode="signup" />
     </>
-  )
+  );
 }
 
-
-export default Signup
+export default Signup;
