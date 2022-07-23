@@ -3,5 +3,5 @@ export type User = {
   id: number;
   createdAt?: Date;
   updatedAt?: Date;
-  password?: string; 
-}
+  password?: string;
+};

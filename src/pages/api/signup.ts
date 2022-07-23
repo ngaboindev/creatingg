@@ -1,31 +1,31 @@
-import prisma from "@/lib/prisma";
-import { User } from "@/types/user";
-import bcrypt from 'bcrypt'
-import cookie from 'cookie'
-import jwt from 'jsonwebtoken'
-import { NextApiRequest, NextApiResponse } from "next";
+import bcrypt from 'bcrypt';
+import cookie from 'cookie';
+import jwt from 'jsonwebtoken';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
 
+import prisma from '@/lib/prisma';
+import type { User } from '@/types/user';
 
 const apiRoute = nextConnect({
-  onNoMatch(req:NextApiRequest, res:NextApiResponse) {
+  onNoMatch(req: NextApiRequest, res: NextApiResponse) {
     res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
   },
 });
 
-apiRoute.post(async (req: NextApiRequest,res: NextApiResponse) => {
+apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const salt = bcrypt.genSaltSync();
   const { email, password } = req.body;
 
-  let user:User;
+  let user: User;
 
   try {
     user = await prisma.user.create({
       data: {
         email,
         password: bcrypt.hashSync(password, salt),
-      }
-    })
+      },
+    });
   } catch (error) {
     res.status(401).json({ error: 'User already exists' });
     return;
@@ -37,7 +37,7 @@ apiRoute.post(async (req: NextApiRequest,res: NextApiResponse) => {
       id: user.id,
       time: Date.now(),
     },
-    process.env.JWT_SECRET,
+    process.env.JWT_SECRET as string,
     {
       expiresIn: '8h',
     }
@@ -54,6 +54,6 @@ apiRoute.post(async (req: NextApiRequest,res: NextApiResponse) => {
   );
 
   res.json(user);
-})
+});
 
 export default apiRoute;

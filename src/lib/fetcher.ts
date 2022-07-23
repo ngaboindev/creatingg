@@ -1,7 +1,7 @@
-import axios from "axios"
+import axios from 'axios';
 
 const fetcher = async (url: string, data: undefined) => {
-   axios({
+  axios({
     method: data ? 'POST' : 'GET',
     url: `${window.location.origin}/api/${url}`,
     withCredentials: true,
@@ -9,7 +9,7 @@ const fetcher = async (url: string, data: undefined) => {
       'Content-Type': 'application/json',
     },
     data: JSON.stringify(data),
-  }).then(res=> res.data)
-}
+  }).then((res) => res.data);
+};
 
-export default fetcher
+export default fetcher;
