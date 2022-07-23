@@ -15,13 +15,16 @@ import {
   Text,
   useBreakpointValue,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react'
 import { PasswordField } from '@/components/PasswordField'
 import NextLink from 'next/link'
+import {useRouter} from 'next/router'
+import axios from 'axios'
 
 
 const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
-  
+   const toast = useToast()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -29,12 +32,38 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const passwordError = password === ''
   const emailError = email === ''
 
+  const router = useRouter()
+
   
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault()
+  
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     setIsLoading(true);
-    // TODO: AUTH LOGIC
+    axios.post(`${window.location.origin}/api/${mode}`, { email, password }).then(() => {
+        toast({
+          description: `${mode} successful`,
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position:"top-right"
+        })
+      router.push('/dashboard');
+    }).catch(({response:data}) => {
+        toast({
+          title: 'Error Occured!',
+          description: data.data.error,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position:"top"
+        })
+    }).finally(() => {
+      setIsLoading(false)
+    })
+     
+  
   }
 
 
