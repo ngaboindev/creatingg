@@ -4,9 +4,8 @@ import {
   withDefaultColorScheme,
   withDefaultVariant,
 } from '@chakra-ui/react';
-
 import { mode } from '@chakra-ui/theme-tools';
-import { Dict } from '@chakra-ui/utils';
+import type { Dict } from '@chakra-ui/utils';
 
 const inputSelectStyles = {
   variants: {
