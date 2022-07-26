@@ -24,6 +24,8 @@ import React, { useState } from 'react';
 
 import { PasswordField } from '@/components/PasswordField';
 
+import Logo from './Logo';
+
 const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
   const toast = useToast();
   const [email, setEmail] = useState('');
@@ -74,9 +76,7 @@ const AuthForm: FC<{ mode: 'signin' | 'signup' }> = ({ mode }) => {
       <Stack spacing="8">
         <Stack spacing="6">
           <Center>
-            <Text fontWeight="bold" fontSize="2xl">
-              Creatingg
-            </Text>
+            <Logo />
           </Center>
           <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
             <Heading size={useBreakpointValue({ base: 'xs', md: 'sm' })}>
