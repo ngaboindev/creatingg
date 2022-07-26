@@ -51,7 +51,7 @@ const theme = extendTheme(
     },
     fonts: {
       heading: `Inter, ${base.fonts?.heading}`,
-      body: `Inter, ${base.fonts?.body}`,
+      body: `Poppins, ${base.fonts?.body}`,
     },
     components: {
       Button: {
