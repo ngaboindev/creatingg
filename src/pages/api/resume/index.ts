@@ -22,9 +22,9 @@ export const config = {
 };
 
 cloudinary.config({
-  cloud_name: 'ngaboindev',
-  api_key: '298593673879177',
-  api_secret: 'xsyKVFSVio2sMav-OSuPzectm24',
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 const apiRoute = nextConnect({
