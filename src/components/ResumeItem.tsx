@@ -24,6 +24,14 @@ const ResumeItem = (props: MainProps) => {
 
   const handleDeleteResume = async () => {
     try {
+      toast({
+        title: 'Deleting resume',
+        status: 'loading',
+        duration: 4000,
+        isClosable: true,
+        position: 'top-right',
+      });
+
       // @ts-expect-error
       await dispatch(deleteResume(props.resume.id)).unwrap();
       toast({

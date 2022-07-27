@@ -25,6 +25,7 @@ import type { RootState } from '@/redux/store';
 
 import DashboardNavLink from './DashboardNavLink';
 import Logo from './Logo';
+import ModeToggler from './ModeToggler';
 
 const DashboardNav = () => {
   const bg = useColorModeValue('white', 'gray.800');
@@ -56,7 +57,10 @@ const DashboardNav = () => {
   }
 
   return (
-    <Box borderColor="gray.200" borderBottomWidth={1}>
+    <Box
+      borderColor={useColorModeValue('gray.200', 'gray.600')}
+      borderBottomWidth={1}
+    >
       <Container maxW="7xl">
         <chakra.header
           bg={bg}
@@ -74,14 +78,17 @@ const DashboardNav = () => {
                 <Logo />
               </Flex>
             </HStack>
-            <HStack spacing={3} display="flex" alignItems="center">
-              <Menu>
-                <MenuButton>{avatar}</MenuButton>
-                <MenuList>
-                  <MenuItem onClick={logOut}>Sign out</MenuItem>
-                </MenuList>
-              </Menu>
-            </HStack>
+            <Flex gap={2}>
+              <HStack spacing={3} display="flex" alignItems="center">
+                <Menu>
+                  <MenuButton>{avatar}</MenuButton>
+                  <MenuList>
+                    <MenuItem onClick={logOut}>Sign out</MenuItem>
+                  </MenuList>
+                </Menu>
+              </HStack>
+              <ModeToggler />
+            </Flex>
           </Flex>
         </chakra.header>
         <Flex
