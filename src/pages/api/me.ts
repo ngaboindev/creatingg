@@ -14,17 +14,21 @@ const apiRoute = nextConnect({
 apiRoute.get(
   validateRoute(
     async (_req: NextApiRequest, res: NextApiResponse, user: User) => {
-      const userInfos = await prisma.user.findUnique({
-        where: {
-          email: user.email,
-        },
-        include: {
-          resume: true,
-          userInfo: true,
-        },
-      });
+      try {
+        const userInfos = await prisma.user.findUnique({
+          where: {
+            email: user.email,
+          },
+          include: {
+            resume: true,
+            userInfo: true,
+          },
+        });
 
-      return res.json({ ...userInfos });
+        return res.json({ ...userInfos });
+      } catch (error) {
+        return res.status(400).json({ error: 'Error occured' });
+      }
     }
   )
 );

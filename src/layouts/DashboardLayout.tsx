@@ -28,7 +28,7 @@ const DashboardLayout = (props: IMainProps) => {
     <Flex direction="column" minHeight="100vh" justifyContent="space-between">
       {props.meta}
       <DashboardNav />
-      <Container maxW="7xl" pt="60px">
+      <Container mb="auto" maxW="7xl" pt="42px">
         {props.children}
       </Container>
       <Footer />

@@ -1,6 +1,7 @@
 import type { User } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
+import slugify from 'slugify';
 
 import { validateRoute } from '@/lib/auth';
 import prisma from '@/lib/prisma';
@@ -15,7 +16,9 @@ const apiRoute = nextConnect({
 apiRoute.post(
   validateRoute(
     async (req: NextApiRequest, res: NextApiResponse, user: User) => {
-      const { names, githubUrl, linkedInUrl, twitterUrl } = req.body;
+      const { names, githubUrl, linkedInUrl, twitterUrl, domain } = req.body;
+      const slug = slugify(domain, { lower: true });
+
       let userInfo;
       try {
         userInfo = await prisma.userInfo.upsert({
@@ -27,17 +30,20 @@ apiRoute.post(
             githubUrl,
             linkedInUrl,
             twitterUrl,
+            slug,
           },
           create: {
             names,
             githubUrl,
             linkedInUrl,
             twitterUrl,
+            slug,
+            domain,
             userId: user.id,
           },
         });
       } catch (error) {
-        res.status(401).json({ error: 'Names already exists' });
+        res.status(401).json({ error: 'Domain already exists' });
         return;
       }
 
