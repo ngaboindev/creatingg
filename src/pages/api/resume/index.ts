@@ -29,7 +29,7 @@ cloudinary.config({
 
 const apiRoute = nextConnect({
   onNoMatch(req: NextApiRequest, res: NextApiResponse) {
-    res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
+    res.status(405).json({ error: `Method - '${req.method}' Not Allowed` });
   },
 });
 
