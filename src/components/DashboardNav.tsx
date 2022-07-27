@@ -1,9 +1,11 @@
 import {
   Avatar,
   Box,
+  Button,
   chakra,
   Container,
   Flex,
+  Heading,
   HStack,
   Menu,
   MenuButton,
@@ -47,13 +49,28 @@ const DashboardNav = () => {
   };
 
   let avatar;
+  let portfolioBtn;
 
   if (userStatus === 'loading') {
     avatar = <SkeletonCircle size="8" />;
   } else if (userStatus === 'succeeded') {
     avatar = <Avatar size="sm" name={user.email} />;
+    portfolioBtn =
+      user.userInfo && user.userInfo.names ? (
+        <Button size="sm" bg="orange.200" _dark={{ bg: 'orange.500' }}>
+          Visit Porfolio Website
+        </Button>
+      ) : (
+        <Button disabled size="xs">
+          Add Personal Info (names) To Unlock Your Portfolio Web
+        </Button>
+      );
   } else if (userStatus === 'failed') {
-    avatar = <Text color="red.500">{error}</Text>;
+    avatar = (
+      <Text color="red.500" fontSize="x-small">
+        {error}
+      </Text>
+    );
   }
 
   return (
@@ -72,13 +89,19 @@ const DashboardNav = () => {
           pt={4}
           pb={9}
         >
-          <Flex alignItems="center" justifyContent="space-between" mx="auto">
+          <Flex
+            flexWrap="wrap"
+            alignItems="center"
+            justifyContent="space-between"
+            mx="auto"
+          >
             <HStack>
-              <Flex>
-                <Logo />
+              <Flex alignItems="center" gap={1}>
+                <Logo /> <Heading fontSize="md">{user.email}</Heading>
               </Flex>
             </HStack>
-            <Flex gap={2}>
+            <Flex flexWrap="wrap" gap={3} alignItems="center">
+              {portfolioBtn}
               <HStack spacing={3} display="flex" alignItems="center">
                 <Menu>
                   <MenuButton>{avatar}</MenuButton>
@@ -107,7 +130,7 @@ const DashboardNav = () => {
             <HStack spacing={4}>
               <DashboardNavLink href="/dashboard" text="Overview" />
               <Spacer />
-              <DashboardNavLink href="/projects" text="Portfolio" />
+              <DashboardNavLink href="/projects" text="Projects" />
             </HStack>
           </Tabs>
         </Flex>
