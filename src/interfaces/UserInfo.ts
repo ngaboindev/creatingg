@@ -1,6 +1,8 @@
 export interface UserInfo {
   names?: string;
+  slug?: string;
+  domain?: string;
   githubUrl?: string;
-  linkedinUrl?: string;
+  linkedInUrl?: string;
   twitterUrl?: string;
 }

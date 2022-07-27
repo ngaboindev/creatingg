@@ -6,11 +6,12 @@ import type { TypedUseSelectorHook } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 
+import projectSlice from './features/projectSlice';
 import resumeSlice from './features/resumeSlice';
 import userSlice from './features/userSlice';
 
 export const store = configureStore({
-  reducer: { users: userSlice, resumes: resumeSlice },
+  reducer: { users: userSlice, resumes: resumeSlice, projects: projectSlice },
   middleware: [thunkMiddleware],
 });
 

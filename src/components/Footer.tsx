@@ -1,6 +1,8 @@
 import { chakra, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
 
+import Logo from './Logo';
+
 const Footer = () => {
   return (
     <Flex
@@ -14,7 +16,7 @@ const Footer = () => {
       align="center"
       justify="space-between"
       px="6"
-      py="4"
+      py="1"
       bg="#edf3f8"
       _dark={{
         bg: '#3e3e3e',
@@ -35,7 +37,7 @@ const Footer = () => {
           color: 'gray.700',
         }}
       >
-        Creatingg
+        <Logo />
       </chakra.a>
 
       <chakra.p
@@ -49,7 +51,23 @@ const Footer = () => {
           color: 'white',
         }}
       >
-        Made for the{' '}
+        Made by{' '}
+        <chakra.a
+          color="black"
+          fontWeight="semibold"
+          _hover={{
+            color: 'brand.800',
+            _dark: { color: 'brand.600' },
+          }}
+          _dark={{
+            color: 'white',
+          }}
+          href="https://www.robertngabo.tech/"
+          target="__blank"
+        >
+          Robert Ngabo
+        </chakra.a>{' '}
+        for the{' '}
         <chakra.a
           color="black"
           fontWeight="semibold"

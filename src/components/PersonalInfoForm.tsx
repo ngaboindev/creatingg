@@ -28,15 +28,16 @@ const PersonalInfoForm = () => {
   const userStatus = useSelector((state: RootState) => state.users.status);
   const toast = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [domain, setDomain] = useState('');
   const [names, setNames] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
-  const [linkedinUrl, setLinkedinUrl] = useState('');
+  const [linkedInUrl, setLinkedinUrl] = useState('');
   const [twitterUrl, setTwitterUrl] = useState('');
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    const body = { names, githubUrl, linkedinUrl, twitterUrl };
+    const body = { names, githubUrl, linkedInUrl, twitterUrl, domain };
     try {
       await dispatch(
         // @ts-expect-error
@@ -52,7 +53,7 @@ const PersonalInfoForm = () => {
       });
     } catch (error) {
       toast({
-        title: 'Names already exists, Try again',
+        title: 'Domain already exists, Try again',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -64,13 +65,15 @@ const PersonalInfoForm = () => {
       setGithubUrl('');
       setLinkedinUrl('');
       setTwitterUrl('');
+      setDomain('');
     }
   };
   useEffect(() => {
     if (userStatus === 'succeeded' && user.userInfo) {
       setNames(user.userInfo?.names as string);
+      setDomain(user.userInfo?.domain as string);
       setGithubUrl(user.userInfo?.githubUrl as string);
-      setLinkedinUrl(user.userInfo?.linkedinUrl as string);
+      setLinkedinUrl(user.userInfo?.linkedInUrl as string);
       setTwitterUrl(user.userInfo?.twitterUrl as string);
     }
   }, [user]);
@@ -94,9 +97,18 @@ const PersonalInfoForm = () => {
             required
             type="text"
           />
+        </FormControl>
+        <FormControl>
+          <FormLabel fontSize="sm">Domain</FormLabel>
+          <Input
+            value={domain}
+            onChange={(e) => setDomain(e.target.value)}
+            placeholder="domain"
+            required
+            type="text"
+          />
           <FormHelperText>
-            {' '}
-            Also name will be used as your portfolio domain
+            domain we be used to navigate to your portfolio pages
           </FormHelperText>
         </FormControl>
       </Stack>
@@ -107,7 +119,7 @@ const PersonalInfoForm = () => {
           <FormLabel fontSize="sm">LinkedIn</FormLabel>
           <Input
             type="text"
-            value={linkedinUrl}
+            value={linkedInUrl}
             onChange={(e) => setLinkedinUrl(e.target.value)}
             placeholder="https://www.linkedin.com/in/robert-ngabo-63118b169/"
           />

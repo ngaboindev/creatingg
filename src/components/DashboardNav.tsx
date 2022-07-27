@@ -7,6 +7,7 @@ import {
   Flex,
   Heading,
   HStack,
+  Link,
   Menu,
   MenuButton,
   MenuItem,
@@ -58,7 +59,9 @@ const DashboardNav = () => {
     portfolioBtn =
       user.userInfo && user.userInfo.names ? (
         <Button size="sm" bg="orange.200" _dark={{ bg: 'orange.500' }}>
-          Visit Porfolio Website
+          <Link href={`/me/${user.userInfo.slug}`} size="sm">
+            Visit Porfolio Website
+          </Link>
         </Button>
       ) : (
         <Button disabled size="xs">
