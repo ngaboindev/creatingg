@@ -2,7 +2,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-const signedinPages = ['/dashboard', '/projects'];
+const signedinPages = ['/dashboard', '/projects', '/projects/create'];
 const authPages = ['/signin', '/signup'];
 
 export default function middleware(req: NextRequest) {
