@@ -4,10 +4,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+import type { UserInfo } from '@/interfaces/UserInfo';
+
 import type { RootState } from '../store';
 
 type InitialStateType = {
   user: {
+    userInfo?: UserInfo | null;
     createdAt?: string;
     email?: string;
     id?: number;
@@ -54,3 +57,21 @@ export const fetchUser = createAsyncThunk('users/fetchUser', async () => {
   const response = await axios.get('/api/me');
   return response.data;
 });
+
+export const addUserInfo = createAsyncThunk(
+  'users/addUserInfo',
+  async (payload, thunkAPI) => {
+    const response = await axios.post('/api/userinfo', payload);
+    thunkAPI.dispatch(fetchUser());
+    return response.data;
+  }
+);
+
+export const updateUserInfo = createAsyncThunk(
+  'users/addUserInfo',
+  async (payload, thunkAPI) => {
+    const response = await axios.post('/api/userinfo', payload);
+    thunkAPI.dispatch(fetchUser());
+    return response.data;
+  }
+);

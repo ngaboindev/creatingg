@@ -14,13 +14,17 @@ const apiRoute = nextConnect({
 apiRoute.get(
   validateRoute(
     async (_req: NextApiRequest, res: NextApiResponse, user: User) => {
-      const resume = await prisma.resume.findUnique({
+      const userInfos = await prisma.user.findUnique({
         where: {
-          userId: user.id,
+          email: user.email,
+        },
+        include: {
+          resume: true,
+          userInfo: true,
         },
       });
 
-      return res.json({ ...user, resume });
+      return res.json({ ...userInfos });
     }
   )
 );

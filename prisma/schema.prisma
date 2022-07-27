@@ -16,8 +16,35 @@ model User {
   updatedAt DateTime @updatedAt
   email String @unique 
   resume Resume?
+  userInfo UserInfo?
+  Project Project?
   password String
 }
+
+model UserInfo { 
+  id Int @default(autoincrement()) @id
+  createdAt DateTime @default(now())
+  names String @unique
+  githubUrl String @default("")
+  linkedInUrl String @default("")
+  twitterUrl String @default("")
+  user User @relation(fields: [userId],references: [id])
+  userId Int @unique
+}
+
+model Project { 
+  id Int @default(autoincrement()) @id
+  createdAt DateTime @default(now())
+  title String
+  videoLink String @default("")
+  image String
+  projectLink String
+  description String @default("")
+  user User @relation(fields: [userId],references: [id])
+  userId Int @unique
+}
+
+
 
 model Resume { 
   id Int @default(autoincrement()) @id
