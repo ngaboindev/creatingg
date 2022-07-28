@@ -1,7 +1,6 @@
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 
-import Footer from '@/components/Footer';
 import PortfolioNav from '@/components/PortfolioNav';
 
 type IMainProps = {
@@ -16,7 +15,7 @@ const PortfolioLayout = (props: IMainProps) => {
       {props.meta}
       <PortfolioNav slug={props.slug} />
       {props.children}
-      <Footer />
+      <Box py={2} />
     </Flex>
   );
 };

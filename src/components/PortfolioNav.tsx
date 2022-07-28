@@ -13,7 +13,7 @@ type PortfolioNavLinkProps = {
 
 const PortfolioNavLink = (props: PortfolioNavLinkProps) => {
   const router = useRouter();
-  const isActive = router.pathname === props.href;
+  const isActive = router.asPath === props.href;
   return (
     <Link href={props.href}>
       <chakra.a cursor="pointer" fontWeight={isActive ? 'bold' : 'normal'}>
@@ -28,8 +28,8 @@ const PortfolioNav = (props: { slug: string }) => {
     <Box>
       <Flex justifyContent="space-evenly" alignItems="center">
         <Flex alignItems="center" justifyContent="center" py={10} gap={4}>
-          <PortfolioNavLink href={`/me/${props.slug}`}>Home</PortfolioNavLink>
-          <PortfolioNavLink href={`/me/${props.slug}/portfolio`}>
+          <PortfolioNavLink href={`/me/${props.slug}/`}>Home</PortfolioNavLink>
+          <PortfolioNavLink href={`/me/${props.slug}/portfolio/`}>
             Portfolio
           </PortfolioNavLink>
         </Flex>
