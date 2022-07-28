@@ -7,6 +7,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import React from 'react';
 
 const HomeHeroSection = () => {
@@ -89,33 +90,35 @@ const HomeHeroSection = () => {
             md: 'center',
           }}
         >
-          <Button
-            as="a"
-            variant="solid"
-            colorScheme="brand"
-            display="inline-flex"
-            alignItems="center"
-            justifyContent="center"
-            w={{
-              base: 'full',
-              sm: 'auto',
-            }}
-            mb={{
-              base: 2,
-              sm: 0,
-            }}
-            size="lg"
-            cursor="pointer"
-          >
-            Get Started
-            <Icon boxSize={4} ml={1} viewBox="0 0 20 20" fill="currentColor">
-              <path
-                fillRule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </Icon>
-          </Button>
+          <Link href="/signup">
+            <Button
+              as="a"
+              variant="solid"
+              colorScheme="brand"
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+              w={{
+                base: 'full',
+                sm: 'auto',
+              }}
+              mb={{
+                base: 2,
+                sm: 0,
+              }}
+              size="lg"
+              cursor="pointer"
+            >
+              Get Started
+              <Icon boxSize={4} ml={1} viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </Icon>
+            </Button>
+          </Link>
         </Stack>
       </Box>
       <Box
