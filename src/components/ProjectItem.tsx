@@ -52,6 +52,7 @@ const ProjectItem = (props: { project: Project; hasActions: boolean }) => {
       mx="auto"
       rounded="lg"
       border="2px"
+      minH="200px"
       borderColor={useColorModeValue('gray.200', 'gray.600')}
       bg="white"
       _dark={{
