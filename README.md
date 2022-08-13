@@ -47,6 +47,7 @@ You are all set! Open [localhost:3000](http://localhost:3000/) to see the app.
 ## 💻 Built with
 
 - [Next JS](https://nextjs.org/)
+- Typescript
 - [Prisma](https://www.prisma.io/)
 - [Cloudinary](https://cloudinary.com/)
 - [Planetscale Database](https://planetscale.com/): source for complete database
